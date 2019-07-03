@@ -62,6 +62,8 @@ class AddAttribute implements DataPatchInterface
      */
     public function apply()
     {
+        $this->moduleDataSetup->getConnection()->startSetup();
+
         /** @var EavSetup $eavSetup */
         $eavSetup = $this->eavSetupFactory->create(['setup' => $this->moduleDataSetup]);
 
@@ -72,5 +74,8 @@ class AddAttribute implements DataPatchInterface
             'used_in_product_listing' => true,
             'user_defined' => true,
         ]);
+
+        $this->moduleDataSetup->getConnection()->endSetup();
+
     }
 }
